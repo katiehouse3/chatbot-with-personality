@@ -6,6 +6,7 @@ from io import BytesIO
 import nltk 
 import pandas as pd
 import dill
+import random
 #nltk.download('punkt') #to tokenize sentences.
 
 def tokenize_data(sent_list):
@@ -129,15 +130,16 @@ class nGramsModel:
 
                 # concatenate history with space
                 context = " ".join(history)
+
                 # look up context distribution
                 dist = self.lm[context]
 
-                # find next word from distribution
-                # maxmimum probable word
-
-                #next_word = list(np.random.choice(list(dist.keys()), 1, list(dist.values())))
-                next_word = [max(dist, key=dist.get)]
-
+                # find next word from random sample of
+                # top 5 most probable words
+                dist = Counter(dist)
+                top_5 = dist.most_common(5)
+                next_word = [random.sample(top_5,1)[0][0]]
+                
                 # only output the first two sentences
                 if next_word[0] in ['.','!','?']:
                     punctuation += 1
