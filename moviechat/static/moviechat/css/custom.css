@@ -1,0 +1,125 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
+@import url('https://fonts.googleapis.com/css?family=Limelight|Open+Sans&display=swap');
+* {
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+h1{
+    font-family: "Limelight";
+    font-size: 56px;
+}
+p{
+    font-family: "Montserrat";
+}
+/* **
+-- BotUI styling
+** */
+.botui-container,
+.botui-messages-container {
+    background: transparent;
+    max-height:98%;
+}
+
+.human.botui-message-content.text {
+	background: white;
+	color: rgb(48, 41, 58);
+}
+
+.botui-message-content {
+	font-size: 18px;
+	font-size: 1rem;
+	font-family: "Montserrat";
+	background: rgb(48, 41, 58);
+	color: white;
+}
+
+.botui-messages-container {
+	max-height: 55vh;
+	overflow-y: auto;
+}
+
+.botui-actions-buttons-button {
+	background-color: rgb(95, 175, 226);
+	font-size: 21.599px;
+	font-size: 1.2rem;
+	font-family: "Montserrat";
+	font-weight: bold;
+	-webkit-transition: 300ms ease-in-out;
+	transition: 300ms ease-in-out
+}
+
+.botui-actions-buttons-button:focus {
+	color: rgb(95, 175, 226);
+	background-color: white;
+}
+
+.botui-actions-buttons-button:not(:focus) {
+	-webkit-box-shadow: none;
+	        box-shadow: none;
+}
+
+.botui-actions-text-input {
+	color: #cdace0;
+	font-size: 21.599px;
+	font-size: 1.2rem;
+	border-bottom: solid 2px currentColor;
+	font-family: "Montserrat";
+	font-weight: bold;
+	-webkit-transition: 300ms ease-in-out;
+	transition: 300ms ease-in-out
+}
+
+.botui-actions-text-input:not(:focus) {
+	font-style: italic;
+}
+
+.botui-action-text-icon {
+	color: currentColor;
+}
+
+/* **
+-- Global styling
+** */
+html {
+	font-size: 18px;
+}
+
+body {
+	margin: 0 auto;
+	font-size: 18px;
+	font-size: 1rem;
+  font-family: "Montserrat";
+  background-color: #735290;
+  color: #ffffff;
+}
+
+header {
+    margin-top: 3%;
+	text-align: center;
+}
+
+.logo-wrapper {
+	display: -webkit-inline-box;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	margin: -30px 50px 0;
+	font-style: italic;
+}
+
+.logo {
+    max-width: 50px;
+    vertical-align:middle;
+	height: auto;
+	-webkit-filter: grayscale(1) brightness(450%);
+	        filter: grayscale(1) brightness(450%);
+}
+
+.bot-wrapper {
+	margin: 0 25%;
+}
