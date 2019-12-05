@@ -1,3 +1,10 @@
 .DS_Store
 data/*.csv
 .ipynb_checkpoints/
+*.pyc
+*~
+/.vscode
+__pycache__
+myvenv
+db.sqlite3
+secrets.py
