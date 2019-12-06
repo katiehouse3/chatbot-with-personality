@@ -6,7 +6,9 @@
 }
 h1{
     font-family: "Limelight";
-    font-size: 56px;
+	font-size: 56px;
+	margin:0px;
+	padding-top:2%;
 }
 p{
     font-family: "Montserrat";
@@ -14,8 +16,12 @@ p{
 /* **
 -- BotUI styling
 ** */
+
+body{
+	height: 100vh;
+}
 .botui-app-container {
-	height: 700px;
+	height: 80%;
 }
 
 .botui-container,
@@ -105,8 +111,7 @@ body {
   color: #ffffff;
 }
 
-header {
-    margin-top: 3%;
+.header {
 	text-align: center;
 }
 

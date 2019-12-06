@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     // Initialization
     var botui = new BotUI('hello-world');
 
