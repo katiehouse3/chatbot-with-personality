@@ -14,10 +14,15 @@ p{
 /* **
 -- BotUI styling
 ** */
+.botui-app-container {
+	height: 700px;
+}
+
 .botui-container,
 .botui-messages-container {
     background: transparent;
-    max-height:98%;
+	max-height:100%;
+	overflow-y: hidden;
 }
 
 .human.botui-message-content.text {
@@ -40,14 +45,16 @@ p{
 
 .botui-actions-buttons-button {
 	background-color: rgb(95, 175, 226);
-	font-size: 21.599px;
+	font-size: 18px;
 	font-size: 1.2rem;
 	font-family: "Montserrat";
 	font-weight: bold;
 	-webkit-transition: 300ms ease-in-out;
 	transition: 300ms ease-in-out
 }
-
+.likert button{
+	padding: 5px;
+}
 .botui-actions-buttons-button:focus {
 	color: rgb(95, 175, 226);
 	background-color: white;
@@ -72,6 +79,11 @@ p{
 .botui-actions-text-input:not(:focus) {
 	font-style: italic;
 }
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+	color: white !important;
+	opacity: 1; /* Firefox */
+  }
 
 .botui-action-text-icon {
 	color: currentColor;
@@ -122,4 +134,8 @@ header {
 
 .bot-wrapper {
 	margin: 0 25%;
+}
+
+.v-select .selected-tag {
+	color: white !important;
 }
