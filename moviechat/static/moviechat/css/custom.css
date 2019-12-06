@@ -13,15 +13,20 @@ h1{
 p{
     font-family: "Montserrat";
 }
+
+  ::-webkit-scrollbar { width: 8px; height: 3px;}
+  ::-webkit-scrollbar-button {  background-color: #9774ab; }
+  ::-webkit-scrollbar-track {  background-color: #9774ab;}
+  ::-webkit-scrollbar-track-piece { background-color: #5b4171;}
+  ::-webkit-scrollbar-thumb { height: 50px; background-color: #9774ab; border-radius: 3px;}
+  ::-webkit-scrollbar-corner { background-color: #9774ab;}
+  ::-webkit-resizer { background-color: #9774ab;}
 /* **
 -- BotUI styling
 ** */
 
-body{
-	height: 100vh;
-}
 .botui-app-container {
-	height: 80%;
+	height: 80% !important;
 }
 
 .botui-container,
@@ -109,6 +114,7 @@ body {
   font-family: "Montserrat";
   background-color: #735290;
   color: #ffffff;
+  height: 100vh !important;
 }
 
 .header {

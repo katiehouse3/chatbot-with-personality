@@ -210,7 +210,7 @@ $(document).ready(function () {
                                 content: `Great, I am going to speak as if I'm in a ` + res.value + ` film.`
                             }).then(function () {
                                 return botui.message.add({
-                                    content: "Type 'evaulate' when you're ready to evaluate. Ready to chat?!?"
+                                    content: "Ready to chat?!?"
                                 })
                             }).then(function () {
                                 return botui.action.button({
@@ -220,7 +220,7 @@ $(document).ready(function () {
                                             value: 'yes'
                                         },
                                         {
-                                            text: 'No, actually',
+                                            text: 'No',
                                             value: 'no'
                                         }
                                     ]
@@ -228,6 +228,9 @@ $(document).ready(function () {
                                     if (res.value == 'yes') {
                                         var myModels = ['A', 'B', 'C'];
                                         var randModel = myModels[Math.floor(Math.random() * myModels.length)];
+                                        botui.message.add({
+                                            content: "Hi I'm Holly. Please type 'evaluate' to stop chatting. What would you like to talk about?"
+                                        })
                                         conversation(firstname, lastname, genre, randModel)
                                     }
                                     else {

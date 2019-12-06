@@ -10,7 +10,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-from secrets import *
+from webapp.secrets import *
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
