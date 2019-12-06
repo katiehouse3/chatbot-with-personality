@@ -36,4 +36,4 @@ def write_eval(request):
                             semantic_score=usereval[5]["semantic_score"],
                             fun_score=usereval[6]["fun_score"],
                             genre_score=usereval[7]["genre_score"])
-    return (JsonResponse('complete', safe=False))
+    return (JsonResponse('Thanks for evaluating! &#128079;', safe=False))

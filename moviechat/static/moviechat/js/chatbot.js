@@ -38,7 +38,7 @@ $(document).ready(function () {
             // user would like to stop talking
             else {
                 botui.message.add({
-                    content: 'TTYL!'
+                    content: 'Talk to you later!'
                 })
                 evaluate(firstname, lastname, genre, model)
             }
@@ -128,7 +128,8 @@ $(document).ready(function () {
                                                 success: function (data) {
                                                     botui.message.add({
                                                         content: data
-                                                    });
+                                                    })
+                                                    continueChat()
                                                 },
                                             })
                                         })
@@ -249,36 +250,52 @@ $(document).ready(function () {
 
 
 
+    function startChat() {
+        // Start chat
+        botui.message.add({
+            content: "Hi, my name is Holly! I am a chatbot trained on movie scripts.",
+        }).then(function () {
+            botui.message.add({
+                content: "Chat with me and I'll respond as if I'm an actor in your favorite movie. &#128540;"
+            })
+        }).then(function () {
+            botui.message.add({
+                content: "What brings you here today?"
+            })
+        }).then(function () {
+            return botui.action.button({
+                delay: 600,
+                action: [
+                    {
+                        text: 'User Testing',
+                        value: 'usertest'
+                    },
+                    {
+                        text: 'Playground Mode',
+                        value: 'playground'
+                    }
+                ]
+            })
+        }).then(function (res) {
+            if (res.value == 'usertest') {
+                userevaluation()
+            }
+        })
+    }
 
-    // Start chat
-    botui.message.add({
-        content: "Hi, my name is Holly! I am a chatbot trained on movie scripts.",
-    }).then(function () {
-        botui.message.add({
-            content: "Chat with me and I'll respond as if I'm an actor in your favorite movie. &#128540;"
-        })
-    }).then(function () {
-        botui.message.add({
-            content: "What brings you here today?"
-        })
-    }).then(function () {
+    function continueChat() {
         return botui.action.button({
             delay: 600,
             action: [
                 {
-                    text: 'User Testing',
-                    value: 'usertest'
-                },
-                {
-                    text: 'Playground Mode',
-                    value: 'playground'
+                    text: 'Chat again?',
+                    value: 'continue'
                 }
             ]
+        }).then(function (res) {
+            startChat();
         })
-    }).then(function (res) {
-        if (res.value == 'usertest') {
-            userevaluation()
-        }
-    })
+    }
 
+    startChat();
 });
