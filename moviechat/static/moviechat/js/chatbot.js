@@ -145,7 +145,7 @@ $(document).ready(function () {
 
     function userevaluation() {
         botui.message.add({
-            content: "Thanks for evaluating! What is your first name?"
+            content: "Thanks for helping test my abilities! What is your first name?"
         }).then(function () {
             return botui.action.text({
                 action: {
@@ -249,9 +249,8 @@ $(document).ready(function () {
     }
 
 
-
-    function startChat() {
-        // Start chat
+    function introduction() {
+        // Holly introduces herself
         botui.message.add({
             content: "Hi, my name is Holly! I am a chatbot trained on movie scripts.",
         }).then(function () {
@@ -259,19 +258,24 @@ $(document).ready(function () {
                 content: "Chat with me and I'll respond as if I'm an actor in your favorite movie. &#128540;"
             })
         }).then(function () {
-            botui.message.add({
-                content: "What brings you here today?"
-            })
+            startChat()
+        })
+    }
+
+    function startChat() {
+        // Start chat
+        botui.message.add({
+            content: "What would you like to do?"
         }).then(function () {
             return botui.action.button({
                 delay: 600,
                 action: [
                     {
-                        text: 'User Testing',
+                        text: 'User testing',
                         value: 'usertest'
                     },
                     {
-                        text: 'Playground Mode',
+                        text: 'Play around',
                         value: 'playground'
                     }
                 ]
@@ -297,5 +301,5 @@ $(document).ready(function () {
         })
     }
 
-    startChat();
+    introduction();
 });
