@@ -8,3 +8,5 @@ __pycache__
 myvenv
 db.sqlite3
 secrets.py
+dialogue_data.pkl
+models/train-on-amlcompute/processed_data_final.csv
