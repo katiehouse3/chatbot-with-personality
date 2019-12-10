@@ -57,6 +57,59 @@ $(document).ready(function () {
         })
     }
 
+    function playmode(genre, model) {
+        var stop = false;
+        botui.action.text({
+            action: {
+                placeholder: ''
+            }
+        }).then(function (res) {
+            if (res.value == 'goodbye') {
+                stop = true;
+                return false;
+            }
+            else {
+                botui.message.add({
+                    loading: true
+                }).then(function (index) {
+                    if (model == 'A') {
+                        ajaxUrl = '/ajax/chat_rnn/'
+                    }
+                    else {
+                        ajaxUrl = '/ajax/chat_ngram/'
+                    }
+                    console.log(model);
+                    console.log(ajaxUrl)
+                    $.ajax({
+                        url: ajaxUrl,
+                        data: {
+                            'userinput': res.value
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            botui.message.update(index, {
+                                loading: false,
+                                content: data,
+                            })
+                        },
+                    })
+                });
+            }
+        }).then(function () {
+            // user would like to keep talking
+            if (stop == false) {
+                playmode(genre, model);
+            }
+            // user would like to stop talking
+            else {
+                botui.message.add({
+                    content: 'Talk to you later!'
+                })
+                continueChat()
+            }
+        })
+    }
+
 
     function evaluate(firstname, lastname, genre, model) {
         botui.message.add({
@@ -274,6 +327,33 @@ $(document).ready(function () {
         })
     }
 
+
+    function playmodeStart() {
+        botui.message.add({
+            content: "Let's have a fun chat!"
+        }).then(function () {
+            botui.message.add({
+                content: "What model would you like to experiment?"
+            }).then(function () {
+                return botui.action.button({
+                    delay: 600,
+                    cssClass: 'likert',
+                    action: [
+                        { text: '3-grams', value: "B" },
+                        { text: 'rnn with attention', value: "A" },
+                    ]
+                }).then(function (res) {
+                    botui.message.add({
+                        content: "Type 'goodbye' to exit"
+                    })
+                    var playmodel = res.value;
+                    var playgenre = "comedy";
+                    playmode(playgenre, playmodel)
+                })
+            })
+        })
+    }
+
     function startChat() {
         // Start chat
         botui.message.add({
@@ -296,9 +376,11 @@ $(document).ready(function () {
             if (res.value == 'usertest') {
                 userevaluation()
             }
+            else {
+                playmodeStart()
+            }
         })
     }
-
     function continueChat() {
         return botui.action.button({
             delay: 600,
@@ -312,6 +394,7 @@ $(document).ready(function () {
             startChat();
         })
     }
+
 
     introduction();
 });
