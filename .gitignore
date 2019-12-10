@@ -10,3 +10,4 @@ db.sqlite3
 secrets.py
 *processed_data_final.csv
 *dialogue_data.pkl
+*rnn_searcher.pkl
