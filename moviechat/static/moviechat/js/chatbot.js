@@ -16,19 +16,31 @@ $(document).ready(function () {
                 return false;
             }
             else {
-                // send ajax request to nlp model
-                $.ajax({
-                    url: '/ajax/api_chat_response/',
-                    data: {
-                        'userinput': res.value
-                    },
-                    dataType: 'json',
-                    success: function (data) {
-                        botui.message.add({
-                            content: data
-                        });
-                    },
-                })
+                botui.message.add({
+                    loading: true
+                }).then(function (index) {
+                    if (model == 'A') {
+                        ajaxUrl = '/ajax/chat_rnn/'
+                    }
+                    else {
+                        ajaxUrl = '/ajax/chat_ngram/'
+                    }
+                    console.log(model);
+                    console.log(ajaxUrl)
+                    $.ajax({
+                        url: ajaxUrl,
+                        data: {
+                            'userinput': res.value
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            botui.message.update(index, {
+                                loading: false,
+                                content: data,
+                            })
+                        },
+                    })
+                });
             }
         }).then(function () {
             // user would like to keep talking
@@ -227,7 +239,7 @@ $(document).ready(function () {
                                     ]
                                 }).then(function (res) {
                                     if (res.value == 'yes') {
-                                        var myModels = ['A', 'B', 'C'];
+                                        var myModels = ['A', 'B'];
                                         var randModel = myModels[Math.floor(Math.random() * myModels.length)];
                                         botui.message.add({
                                             content: "Hi I'm Holly. Please type 'evaluate' to stop chatting. What would you like to talk about?"
