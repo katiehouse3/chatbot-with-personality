@@ -234,14 +234,23 @@ def train(data_folder):
 
 
 def main():
+<<<<<<< HEAD
     # let user feed in 2 parameters, the dataset to mount or download, and the regularization rate of the logistic regression model
+=======
+    # let user feed in 2 parameters, the dataset to mount or download
+    # and the output of the final model
+>>>>>>> rnn
     parser = argparse.ArgumentParser()
     parser.add_argument('--data_dir', type=str,
                         dest='data_folder', help='data folder mounting point')
     parser.add_argument('--output_dir', type=str, help='output directory')
     args = parser.parse_args()
+<<<<<<< HEAD
 
     data_folder = args.data_folder
+=======
+    data_folder = args.data_folder  # access the datastore folder
+>>>>>>> rnn
 
     model = train(data_folder)
     os.makedirs(args.output_dir, exist_ok=True)

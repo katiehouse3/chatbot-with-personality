@@ -230,9 +230,6 @@ def train(data_folder):
             run.log('best_min_loss', np.float(min_total_loss))
 
             iters += 1
-            break
-        break
-
     return model
 
 
