@@ -1,13 +1,9 @@
-<<<<<<< HEAD
 import os
 from django.http import JsonResponse
-=======
->>>>>>> bf1e1396fd2742fcecd4d3c3190ea17d1ff5899e
 from django.shortcuts import render
 import dill
 from moviechat.models import UserEval
 import json
-<<<<<<< HEAD
 import subprocess
 from subprocess import check_output
 
@@ -41,22 +37,20 @@ def chat_rnn(request):
     text = proc.communicate()[0].decode('utf-8')
     return (JsonResponse(text, safe=False))
 
-
-=======
-
 # Create your views here.
+
+
 def home(request):
     return render(request, 'moviechat/index.html', {})
 
-import os
-from django.http import JsonResponse
 
 # load the python models
 CURRENT_DIR = os.path.dirname(__file__)
 model_file = os.path.join(CURRENT_DIR, 'models/baseline.pkl')
 dill._dill._reverse_typemap['ClassType'] = type
 dill.settings['recurse'] = True
-mymodel = dill.load(open (model_file,"rb"))
+mymodel = dill.load(open(model_file, "rb"))
+
 
 def api_chat_response(request):
     print('went to response!')
@@ -65,18 +59,13 @@ def api_chat_response(request):
     result = mymodel.generate_text(context=str(chat))
     return (JsonResponse(result, safe=False))
 
->>>>>>> bf1e1396fd2742fcecd4d3c3190ea17d1ff5899e
+
 # write evaluation
 def write_eval(request):
     usereval = json.loads(request.GET['usereval'])
     print(usereval)
-<<<<<<< HEAD
     UserEval.objects.create(first_name=usereval[0]["firstname"],
                             last_name=usereval[1]["lastname"],
-=======
-    UserEval.objects.create(first_name=usereval[0]["firstname"], 
-                            last_name=usereval[1]["lastname"], 
->>>>>>> bf1e1396fd2742fcecd4d3c3190ea17d1ff5899e
                             genre=usereval[2]["genre"],
                             model=usereval[3]["model"],
                             syntactic_score=usereval[4]["syntactic_score"],
