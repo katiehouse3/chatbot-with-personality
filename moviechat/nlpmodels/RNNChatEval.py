@@ -20,6 +20,7 @@ import math
 import dill
 import sys
 device = 'cpu'
+import gzip
 
 PAD_token = 0
 SOS_token = 1
@@ -283,11 +284,12 @@ if __name__ == '__main__':
     decoder_file = os.path.join(
         CURRENT_DIR, 'rnn_pkl_files/rnn_decoder.pkl')
     searcher_file = os.path.join(
-        CURRENT_DIR, 'rnn_pkl_files/rnn_searcher.pkl')
+        CURRENT_DIR, 'rnn_pkl_files/searchable_pkl_unconpressed.pkl')
     voc = dill.load(open(voc_file,"rb"))
     encoder = dill.load(open(encoder_file,"rb"))
     decoder = dill.load(open(decoder_file,"rb"))
-    searcher = dill.load(open(searcher_file,"rb"))
+    #searcher = dill.load(gzip.open(searcher_file, 'rb'))
+    searcher = dill.load(open(searcher_file, 'rb'))
 
     myEval = RNNChatEval(searcher = searcher, encoder = encoder, voc = voc, decoder = decoder)
     answer = myEval.evaluateInput(sentence=str(sys.argv[1]))
