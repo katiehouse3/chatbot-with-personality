@@ -59,8 +59,9 @@ def api_chat_response(request):
     result = mymodel.generate_text(context=str(chat))
     return (JsonResponse(result, safe=False))
 
-
 # write evaluation
+
+
 def write_eval(request):
     usereval = json.loads(request.GET['usereval'])
     print(usereval)
