@@ -8,6 +8,7 @@ View our website at: https://www.hollychatbot.com/ !
 * [RNN Model](https://github.com/katiehouse3/chatbot-with-personality/blob/master/moviechat/nlpmodels/RNNChatEval.py)
 * [GPT2 Model](https://github.com/katiehouse3/chatbot-with-personality/blob/master/models/train.py)
 * [GPT2 Azure Training](https://github.com/katiehouse3/chatbot-with-personality/blob/master/models/Train%20GPT2%20with%20Azure.ipynb)
+* [BERT Model](https://github.com/katiehouse3/chatbot-with-personality/blob/1596207d92e162d9b3938ceb2b125cd22bb3f99a/models/BERT.py)
 
 ## Web App Code
 * [Chatbot JavaScript File](https://github.com/katiehouse3/chatbot-with-personality/blob/master/moviechat/static/moviechat/js/chatbot.js)
