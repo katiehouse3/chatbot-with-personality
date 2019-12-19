@@ -275,6 +275,54 @@ if __name__ == '__main__':
                 decoder_input = torch.unsqueeze(decoder_input, 0)
             # Return collections of word tokens and scores
             return all_tokens, all_scores
+        
+
+        def evaluateloss(encoder, decoder, searcher, voc, sentence, max_length=MAX_LENGTH):
+            ### Format input sentence as a batch
+            # words -> indexes
+            indexes_batch = [indexesFromSentence(voc, sentence)]
+            # Create lengths tensor
+            lengths = torch.tensor([len(indexes) for indexes in indexes_batch])
+            # Transpose dimensions of batch to match models' expectations
+            input_batch = torch.LongTensor(indexes_batch).transpose(0, 1)
+            # Use appropriate device
+            input_batch = input_batch.to(device)
+            lengths = lengths.to(device)
+            # Decode sentence with searcher
+            loss = searcher(input_batch, lengths, max_length)
+            # indexes -> words
+            return loss
+
+    # function to evaluate LM perplexity
+        def compute_perplexity(pairs_batch, encoder, decoder, max_length=MAX_LENGTH):
+            criterion = nn.CrossEntropyLoss(ignore_index=0, reduction='sum')    
+            totalN = 0
+            nll = 0 
+            for pair in pairs_batch:
+              indexes_batch = [indexesFromSentence(voc, pair[0])]
+              lengths = torch.tensor([len(indexes) for indexes in indexes_batch])
+              input_batch = torch.LongTensor(indexes_batch).transpose(0, 1)
+
+              indexes_batch_target = [indexesFromSentence(voc, pair[1])]
+              max_target_len = torch.tensor([len(indexes) for indexes in indexes_batch_target])
+              target_batch = torch.LongTensor(indexes_batch_target).transpose(0, 1)
+
+              encoder_outputs, encoder_hidden = encoder(input_batch, lengths)
+              decoder_input = torch.ones(1, 1, dtype=torch.long) * SOS_token
+              decoder_hidden = encoder_hidden[:decoder.n_layers]
+
+              for i in range(max_target_len):
+                    decoder_output, decoder_hidden = decoder(decoder_input, decoder_hidden, encoder_outputs)
+                    # Teacher forcing: next input is current target
+                    decoder_scores, decoder_input = torch.max(decoder_output, dim=1)
+                    #crossEntropy = criterion(decoder_output, target[i])
+                    crossEntropy = -torch.log(torch.gather(decoder_output, 1, target_batch[i].view(-1, 1)).squeeze(1))
+                    nll += crossEntropy.detach().mean()
+                    # Prepare current token to be next decoder input (add a dimension)
+                    decoder_input = torch.unsqueeze(decoder_input, 0)
+            perplexity = nll /len(pairs_batch)
+            return perplexity.data
+
     
     dill._dill._reverse_typemap['ClassType'] = type
     CURRENT_DIR = os.path.dirname(__file__)
